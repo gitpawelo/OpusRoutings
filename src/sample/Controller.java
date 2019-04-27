@@ -1,11 +1,25 @@
 package sample;
 
-import javafx.event.ActionEvent;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 public class Controller {
-    public void pressButton(ActionEvent event){
 
-        System.out.println("Hello WORLD");
-    }
+    @FXML
+    private Button browseBtn;
+
+    @FXML
+    private Button createJsonBtn;
+
+    @FXML
+    private TextField TpaTextField;
+
+    @FXML
+    private TextField JsonTextField;
+
+    @FXML
+    private TextField OCcustIdListView;
 
 }
