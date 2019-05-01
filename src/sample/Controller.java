@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
@@ -27,6 +28,7 @@ public class Controller {
     @FXML
     private ListView ocCustIdListView;
 
+
     public void buttonBrowse(ActionEvent event) throws Exception {
 
         FileChooser fc = new FileChooser();
@@ -34,7 +36,8 @@ public class Controller {
 
         String path = String.valueOf(selectedFile);
         if (selectedFile != null){
- //           ocCustIdListView.getItems().add(selectedFile.getAbsoluteFile());
+//            ocCustIdListView.getSelectionModel().getSelectedItems().addAll(selectedFile.list());
+            ocCustIdListView.getItems().addAll(selectedFile.getAbsolutePath());
             BufferedReader reader = null;
             BufferedWriter writer = null;
 
@@ -48,6 +51,7 @@ public class Controller {
             try {
                 reader = new BufferedReader(new FileReader(path));
                 writer = new BufferedWriter(new FileWriter(pathOut));
+
 
                 String line1;
 
@@ -77,8 +81,11 @@ public class Controller {
 
     public void ButtonCreateJson(ActionEvent event) throws Exception{
 
+        String tpa;
 
+    tpa = tpaTextField.getCharacters().toString();
 
+        System.out.println("tpa: " + tpa);
 
     }
 
