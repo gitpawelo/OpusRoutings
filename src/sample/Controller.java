@@ -5,13 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.*;
 
 public class Controller {
+
+    String path;
 
     @FXML
     private Button browseBtn;
@@ -34,8 +35,16 @@ public class Controller {
         FileChooser fc = new FileChooser();
         File selectedFile = new File(fc.showOpenDialog(null).toString());
 
-        String path = String.valueOf(selectedFile);
+        path = String.valueOf(selectedFile);
+
         if (selectedFile != null){
+
+            ocCustIdListView.getItems().addAll(selectedFile.getAbsolutePath());
+        }else
+            System.out.println("file is not valid");
+
+
+/*        if (selectedFile != null){
 //            ocCustIdListView.getSelectionModel().getSelectedItems().addAll(selectedFile.list());
             ocCustIdListView.getItems().addAll(selectedFile.getAbsolutePath());
             BufferedReader reader = null;
@@ -77,15 +86,16 @@ public class Controller {
         }else
             System.out.println("file is not valid");
 
-    }
+*/    }
 
     public void ButtonCreateJson(ActionEvent event) throws Exception{
 
-        String tpa;
+        String tpa, jsonName;
 
-    tpa = tpaTextField.getCharacters().toString();
+        tpa = tpaTextField.getText();
+        jsonName = jsonTextField.getText();
 
-        System.out.println("tpa: " + tpa);
+        System.out.println(path);
 
     }
 

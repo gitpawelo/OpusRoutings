@@ -6,16 +6,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="573.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Button fx:id="browseBtn" layoutX="309.0" layoutY="314.0" mnemonicParsing="false" onAction="#buttonBrowse" text="Browse" />
-      <Button fx:id="createJsonBtn" layoutX="457.0" layoutY="314.0" mnemonicParsing="false" text="Create JSON" />
-      <TextField fx:id="TpaTextField" layoutX="160.0" layoutY="66.0" prefHeight="25.0" prefWidth="318.0" />
-      <TextField fx:id="jsonTextField" layoutX="160.0" layoutY="121.0" />
-      <ListView fx:id="ocCustIdListView" layoutX="160.0" layoutY="182.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label layoutX="160.0" layoutY="49.0" text="TPA:" />
-      <Label layoutX="160.0" layoutY="104.0" text="JSON name:" />
-      <Label layoutX="160.0" layoutY="165.0" text="OC Customer ID LIst" />
+      <Button fx:id="browseBtn" layoutX="273.0" layoutY="212.0" mnemonicParsing="false" onAction="#buttonBrowse" text="Browse" />
+      <Button fx:id="createJsonBtn" layoutX="388.0" layoutY="237.0" mnemonicParsing="false" onAction="#ButtonCreateJson" text="Create JSON" />
+      <TextField fx:id="tpaTextField" layoutX="58.0" layoutY="66.0" prefHeight="25.0" prefWidth="413.0" promptText="tpaTextField" />
+      <TextField fx:id="jsonTextField" layoutX="58.0" layoutY="123.0" />
+      <ListView fx:id="ocCustIdListView" layoutX="58.0" layoutY="183.0" prefHeight="25.0" prefWidth="270.0" />
+      <Label layoutX="58.0" layoutY="49.0" text="TPA:" />
+      <Label layoutX="58.0" layoutY="106.0" text="JSON name:" />
+      <Label layoutX="58.0" layoutY="162.0" text="OC Customer ID LIst" />
       <Button layoutX="-52.0" layoutY="170.0" mnemonicParsing="false" text="Button" />
    </children>
 </Pane>
