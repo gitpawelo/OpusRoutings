@@ -91,11 +91,57 @@ public class Controller {
     public void ButtonCreateJson(ActionEvent event) throws Exception{
 
         String tpa, jsonName;
+        String pathOut;
 
         tpa = tpaTextField.getText();
         jsonName = jsonTextField.getText();
 
-        System.out.println(path);
+
+        System.out.println("ściezka: " + path);
+        path = path.replace("\\", "\\\\");
+        System.out.println("ściezka: " + path);
+
+
+        pathOut = path;
+        //replace file name after last backslashes to name from jsonTextField, ie: \\test.txt -> \\newfile.json
+        pathOut = pathOut.replace(pathOut.substring(pathOut.lastIndexOf("\\\\")),"\\\\" + jsonName + ".json");
+
+        System.out.println(pathOut);
+
+     //   pathOut = "C:\\Users\\Pawel\\Desktop\\output.txt";
+
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+
+
+
+        try {
+            reader = new BufferedReader(new FileReader(path));
+            writer = new BufferedWriter(new FileWriter(pathOut));
+
+
+            String line1;
+
+            while ((line1 = reader.readLine()) != null) {
+                writer.write(line1
+                        .replace("Witaj", "Hello")
+
+                );
+
+                writer.append("\n");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+            if (writer != null) {
+                writer.close();
+            }
+        }
+
 
     }
 
