@@ -9,6 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 public class Controller {
 
@@ -90,41 +94,47 @@ public class Controller {
 
     public void ButtonCreateJson(ActionEvent event) throws Exception{
 
-        String tpa, jsonName;
-        String pathOut;
+        String tpa, jsonName, pathOut, entireFileText;
 
         tpa = tpaTextField.getText();
         jsonName = jsonTextField.getText();
 
 
-        System.out.println("ściezka: " + path);
-        path = path.replace("\\", "\\\\");
-        System.out.println("ściezka: " + path);
+        entireFileText = new Scanner(new File(path))
+                .useDelimiter("\\A").next();
 
+        path = path.replace("\\", "\\\\");
 
         pathOut = path;
         //replace file name after last backslashes to name from jsonTextField, ie: \\test.txt -> \\newfile.json
         pathOut = pathOut.replace(pathOut.substring(pathOut.lastIndexOf("\\\\")),"\\\\" + jsonName + ".json");
 
-        System.out.println(pathOut);
+        System.out.println(entireFileText);
+        List<String> result = new ArrayList<String>(Arrays.asList(entireFileText.split(";")));
 
-     //   pathOut = "C:\\Users\\Pawel\\Desktop\\output.txt";
+        System.out.println("result: " + result);
 
         BufferedReader reader = null;
         BufferedWriter writer = null;
 
+        System.out.println(result.get(0));
 
 
         try {
             reader = new BufferedReader(new FileReader(path));
             writer = new BufferedWriter(new FileWriter(pathOut));
 
-
             String line1;
 
+            writer.write("rarstrfysd\n"
+                    + "djfsbfisd\n"
+                    + "sdfsdfsdf\n");
+
             while ((line1 = reader.readLine()) != null) {
+
                 writer.write(line1
-                        .replace("Witaj", "Hello")
+                        .replace(line1, "")
+                        .concat("tata " + line1 + " mamam " + line1 + " sdsf")
 
                 );
 
@@ -141,6 +151,7 @@ public class Controller {
                 writer.close();
             }
         }
+
 
 
     }
