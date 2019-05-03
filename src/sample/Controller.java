@@ -72,6 +72,7 @@ public class Controller {
         //split values per newline and add it to ArrayList
         List<String> result = new ArrayList<String>(Arrays.asList(entireFileText.split("\n")));
 
+
         arraySize = result.size();
 
         BufferedReader reader = null;
@@ -133,6 +134,7 @@ public class Controller {
 
             while ((line = reader.readLine()) != null) {
 
+                line = line.trim();
                 writer.write(line
                         .replace(line, "")
                         .concat("      { \"parent\": \"idf1.digiInvoice\", \"id\": \"" + line + "\", \"to\": { \"type\": \"OC.CUSTOMER.ID\", \"value\": \"" + line + "\" }},\n")
