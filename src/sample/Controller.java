@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +43,8 @@ public class Controller {
         File selectedFile = new File(fc.showOpenDialog(null).toString());
 
         path = String.valueOf(selectedFile);
+
+
 
         if (selectedFile != null){
 
@@ -109,32 +114,80 @@ public class Controller {
         //replace file name after last backslashes to name from jsonTextField, ie: \\test.txt -> \\newfile.json
         pathOut = pathOut.replace(pathOut.substring(pathOut.lastIndexOf("\\\\")),"\\\\" + jsonName + ".json");
 
-        System.out.println(entireFileText);
-        List<String> result = new ArrayList<String>(Arrays.asList(entireFileText.split(";")));
+//        System.out.println(entireFileText);
+        List<String> result = new ArrayList<String>(Arrays.asList(entireFileText.split("\n")));
+        int arraySize = result.size();
 
-        System.out.println("result: " + result);
 
+        System.out.println(" sieze" + arraySize);
+        System.out.println(result.get(arraySize-1).toString());
         BufferedReader reader = null;
         BufferedWriter writer = null;
-
-        System.out.println(result.get(0));
 
 
         try {
             reader = new BufferedReader(new FileReader(path));
             writer = new BufferedWriter(new FileWriter(pathOut));
 
-            String line1;
+            String line;
 
-            writer.write("rarstrfysd\n"
-                    + "djfsbfisd\n"
-                    + "sdfsdfsdf\n");
+            writer.write( "{\n" +
+                            "\n" +
+                            "   \"senderLists\": [\n" +
+                            "\n" +
+                            "      {\n" +
+                            "\n" +
+                            "        \"id\":   \"allow-all\",\n" +
+                            "\n" +
+                            "        \"type\": \"blacklist\",\n" +
+                            "\n" +
+                            "        \"routingIds\": []\n" +
+                            "\n" +
+                            "      }\n" +
+                            "\n" +
+                            "   ],\n" +
+                            "\n" +
+                            "   \"routes\": [\n" +
+                            "\n" +
+                            "      {\n" +
+                            "\n" +
+                            "        \"id\": \"idf1.digiInvoice\",\n" +
+                            "\n" +
+                            "        \"startDate\": \"2018-01-31\",\n" +
+                            "\n" +
+                            "        \"flowId\": \"digitizing\",\n" +
+                            "\n" +
+                            "        \"fromListId\": \"allow-all\",\n" +
+                            "\n" +
+                            "        \"configuredDeliveryChannelId\":\n" +
+                            "\n" +
+                            "            \"" + tpa + "\",\n" +
+                            "\n" +
+                            "        \"messageType\": \"invoice\",\n" +
+                            "\n" +
+                            "        \"messageTypeSub\": \"*\",\n" +
+                            "\n" +
+                            "        \"enrichement\": {\n" +
+                            "\n" +
+                            "         \"items\":     []\n" +
+                            "\n" +
+                            "        }\n" +
+                            "\n" +
+                            "      },\n" +
+                            "\n" +
+                            " \n"
+            );
 
-            while ((line1 = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
 
-                writer.write(line1
-                        .replace(line1, "")
-                        .concat("tata " + line1 + " mamam " + line1 + " sdsf")
+                writer.write(line
+                        .replace(line, "")
+                        .concat("      { \"parent\": \"idf1.digiInvoice\", \"id\": \"" + line + "\", \"to\": { \"type\": \"OC.CUSTOMER.ID\", \"value\": \"" + line + "\" }},\n")
+                        .replace(result.get(arraySize-1) + "\" }},", result.get(arraySize-1) + "\" }}\n" +
+                                "\n" +
+                                "   ]\n" +
+                                "\n" +
+                                "}")
 
                 );
 
