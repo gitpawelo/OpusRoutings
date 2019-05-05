@@ -58,20 +58,31 @@ public class Controller {
 
         jsonName = jsonTextField.getText();
 
+        System.out.println(jsonName.length());
         entireFileText = new Scanner(new File(path))
-                .useDelimiter("\\A").next();
+                .useDelimiter("\\A").next().trim();
 
         //replace single '\' to double '\\' to create readable path for BufferedReader/BufferedWriter
         path = path.replace("\\", "\\\\");
 
+        String jsonNameDefault = entireFileText.substring(0, 10);
         pathOut = path;
 
-        //replace file name after last backslashes to name from jsonTextField, ie: \\test.txt -> \\newfile.json
-        pathOut = pathOut.replace(pathOut.substring(pathOut.lastIndexOf("\\\\")), "\\\\" + jsonName + ".json");
+        //check condition if jsonTextField is empty:
+
+        if (jsonName.length() != 0) {
+
+            //replace file name after last backslashes to name from jsonTextField, ie: \\test.txt -> \\newfile.json
+            pathOut = pathOut.replace(pathOut.substring(pathOut.lastIndexOf("\\\\")), "\\\\" + jsonName + ".json");
+        } else {
+       //  if user forget to input json name then it will be created by default as a concat of 10 signs from file in first line + _idf1.json
+       //  ie. occustid01xx000001 -> occustid01 + _idf1.json = ccustid01_idf1.json
+            pathOut = pathOut.replace(pathOut.substring(pathOut.lastIndexOf("\\\\")), "\\\\" + jsonNameDefault + "_idf1.json");
+        }
+
 
         //split values per newline and add it to ArrayList
         List<String> result = new ArrayList<String>(Arrays.asList(entireFileText.split("\n")));
-
 
         arraySize = result.size();
 
