@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Controller {
 
@@ -97,47 +98,27 @@ public class Controller {
             String line;
 
             writer.write("{\n" +
-                    "\n" +
                     "   \"senderLists\": [\n" +
-                    "\n" +
                     "      {\n" +
-                    "\n" +
                     "        \"id\":   \"allow-all\",\n" +
-                    "\n" +
                     "        \"type\": \"blacklist\",\n" +
-                    "\n" +
                     "        \"routingIds\": []\n" +
-                    "\n" +
                     "      }\n" +
-                    "\n" +
                     "   ],\n" +
                     "\n" +
                     "   \"routes\": [\n" +
-                    "\n" +
                     "      {\n" +
-                    "\n" +
                     "        \"id\": \"idf1.digiInvoice\",\n" +
-                    "\n" +
                     "        \"startDate\": \"2018-01-31\",\n" +
-                    "\n" +
                     "        \"flowId\": \"digitizing\",\n" +
-                    "\n" +
                     "        \"fromListId\": \"allow-all\",\n" +
-                    "\n" +
                     "        \"configuredDeliveryChannelId\":\n" +
-                    "\n" +
                     "            \"" + tpa + "\",\n" +
-                    "\n" +
                     "        \"messageType\": \"invoice\",\n" +
-                    "\n" +
                     "        \"messageTypeSub\": \"*\",\n" +
-                    "\n" +
                     "        \"enrichement\": {\n" +
-                    "\n" +
                     "         \"items\":     []\n" +
-                    "\n" +
                     "        }\n" +
-                    "\n" +
                     "      },\n" +
                     "\n" +
                     " \n"
@@ -146,18 +127,20 @@ public class Controller {
             while ((line = reader.readLine()) != null) {
 
                 line = line.trim();
-                writer.write(line
-                        .replace(line, "")
-                        .concat("      { \"parent\": \"idf1.digiInvoice\", \"id\": \"" + line + "\", \"to\": { \"type\": \"OC.CUSTOMER.ID\", \"value\": \"" + line + "\" }},\n")
-                        //remove from last line ','
-                        .replace(result.get(arraySize - 1) + "\" }},", result.get(arraySize - 1) + "\" }}\n" +
-                                "\n" +
-                                "   ]\n" +
-                                "\n" +
-                                "}")
 
-                );
+                if (line.length() == 18) {
+                    writer.write(line
+                            .replace(line, "")
+                            .concat("      { \"parent\": \"idf1.digiInvoice\", \"id\": \"" + line + "\", \"to\": { \"type\": \"OC.CUSTOMER.ID\", \"value\": \"" + line + "\" }},")
+                            //remove from last line ','
+                            .replace(result.get(arraySize - 1) + "\" }},", result.get(arraySize - 1) + "\" }}\n" +
+                                    "\n" +
+                                    "   ]\n" +
+                                    "\n" +
+                                    "}")
 
+                    );
+                }
                 writer.append("\n");
             }
 
