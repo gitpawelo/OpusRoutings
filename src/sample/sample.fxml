@@ -10,7 +10,7 @@
    <children>
       <Button fx:id="browseBtn" layoutX="380.0" layoutY="212.0" mnemonicParsing="false" onAction="#buttonBrowse" text="Browse" />
       <Button fx:id="createJsonBtn" layoutX="514.0" layoutY="237.0" mnemonicParsing="false" onAction="#ButtonCreateJson" text="Create JSON" />
-      <TextField fx:id="tpaTextField" layoutX="58.0" layoutY="66.0" prefHeight="25.0" prefWidth="539.0" promptText="Enter you TPA" />
+      <TextField fx:id="tpaTextField" layoutX="58.0" layoutY="66.0" prefHeight="25.0" prefWidth="539.0" promptText="Enter your TPA" />
       <TextField fx:id="jsonTextField" layoutX="58.0" layoutY="123.0" promptText="occustid01_idf1" />
       <ListView fx:id="ocCustIdListView" layoutX="58.0" layoutY="183.0" prefHeight="25.0" prefWidth="377.0" />
       <Label layoutX="58.0" layoutY="49.0" text="TPA:" />

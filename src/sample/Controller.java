@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Controller {
 
@@ -38,6 +37,9 @@ public class Controller {
     public void buttonBrowse(ActionEvent event) throws Exception {
 
         FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TXT Files", "*.txt")
+        );
         File selectedFile = new File(fc.showOpenDialog(null).toString());
 
         path = String.valueOf(selectedFile);
@@ -59,7 +61,6 @@ public class Controller {
 
         jsonName = jsonTextField.getText();
 
-        System.out.println(jsonName.length());
         entireFileText = new Scanner(new File(path))
                 .useDelimiter("\\A").next().trim();
 
